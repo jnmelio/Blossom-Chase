@@ -25,12 +25,12 @@ You are a florist who tries to get as many cherry blossom petals as he can so he
 
 ## Data structure
 
-# screen.js
+### screen.js
 - build mainScreen() {}
 - build gameScreen() {}
 - build gameOverScreen() {}
 
-# gameFeature.js
+### gameFeature.js
 - startGame () {}
 - loop (){}
 - addCharacter () {}
@@ -41,7 +41,7 @@ You are a florist who tries to get as many cherry blossom petals as he can so he
 - timer () {}
 - gameOver () {}
 
-# character.js
+### character.js
 - character () {
     this.x; 
     this.y; 
@@ -51,7 +51,7 @@ You are a florist who tries to get as many cherry blossom petals as he can so he
 - move () {}
 - screenCollision () {}
 
-# blackpetals.js
+### blackpetals.js
 - blackPetals () {
     this.x; 
     this.y; 
@@ -60,7 +60,7 @@ You are a florist who tries to get as many cherry blossom petals as he can so he
 - draw () {}
 - move () {}
 
-# treesandclouds.js
+### treesandclouds.js
 - treeCloud () {
     this.x; 
     this.y; 
@@ -68,7 +68,7 @@ You are a florist who tries to get as many cherry blossom petals as he can so he
 }
 - draw () {}
 
-# pinkpetals.js
+### pinkpetals.js
 - pinkPetals () {
     this.x; 
     this.y; 
@@ -106,9 +106,10 @@ You are a florist who tries to get as many cherry blossom petals as he can so he
 - gameFeature - collision
 - gameFeature - gameOver
 - gameFeature - newLevel
+
 ## Additional Links
 
-Notion
+Planning
 https://www.notion.so/Blossom-Chase-9a95971efe4b459093ceb25413c3bbfc
 
 Slides
