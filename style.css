@@ -1,0 +1,53 @@
+body {
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.mainScreen {
+    width: 70%;
+    height: 500px;
+    border: 2px solid black;
+    background-image: url('/Images/main-screen-back.jpg');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#mainTitle {
+    border: 1px solid pink;
+    position: relative;
+    padding-top: 150px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size:  70px;
+    color:pink;
+    margin-bottom: 0px;
+}
+
+#instructions {
+    color : white;
+    border: 1px solid black;
+    margin-top: 0px;
+}
+
+.gameOver {
+
+}
+.gameOverScreen {
+    border: 2px solid black;
+    width: 70%;
+    height: 500px;
+    background-image: url('./Images/gameoverback.jpg');
+    background-position: center;
+    background-size:  100%;
+    background-repeat: no-repeat;
+}
+#gameOverTitle {
+    border: 1px solid pink;
+    position: relative;
+    padding-top: 100px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size:  70px;
+    color:darkred;
+    margin-bottom: 0px;
+}
+
