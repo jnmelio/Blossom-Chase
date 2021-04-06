@@ -7,6 +7,8 @@ let gameOverScreen = document.querySelector('.gameOver')
 let winningScreen = document.querySelector('.winningScreen')
 btnStart = document.querySelector('#start')
 btnReStart = document.querySelector('#restart')
+btnReStart2 = document.querySelector('#restart2')
+btnSound = document.querySelector('#sound')
 
 
 //Images
@@ -30,7 +32,8 @@ let score = 0
 let x = 200
 let treeCloud = [
     {x: 200 , y:100},
-    {x: 550 , y: 150}
+    {x: 550 , y: 150},
+    {x: 900, y: 50}
 ]
 let floristX = 30
 let floristY = 100
@@ -38,14 +41,25 @@ let isArrowRight = false
 let isArrowUp = false
 let isArrowLeft = false
 let isArrowDown = false
+let isSpaceBar = false
 let multiplePinkPetals = [
-    {x: 100, y:30},
-    // {x: 700, y: 200}
+    {x: 100, y: 30},
+    {x: 475, y: 200}
 ]
 let multipleBlackPetals = [
     {x: 1000, y:250},
     {x: 800, y: 400}
 ]
+// Timer
+function timer () {
+    let counter = 0
+    let id1 = setInterval (() => {
+        counter++
+        if (counter == 200) {
+            gameOver = true
+        }
+    }, 1000 )
+}
 
 //Function
 document.addEventListener('keydown', (event) => {
@@ -54,21 +68,31 @@ document.addEventListener('keydown', (event) => {
         isArrowUp = false
         isArrowLeft = false
         isArrowDown = false
+        isSpaceBar = false
     } else if (event.code == 'ArrowLeft') {
         isArrowRight = false
         isArrowUp = false
         isArrowLeft = true
         isArrowDown = false
+        isSpaceBar = false
     } else if (event.code == 'ArrowUp') {
         isArrowRight = false
         isArrowUp = true
         isArrowLeft = false
         isArrowDown = false
+        isSpaceBar = false
     } else if (event.code == 'ArrowDown') {
         isArrowRight = false
         isArrowUp = false
         isArrowLeft = false
         isArrowDown = true
+        isSpaceBar = false
+    } else if (event.code == 'Space') {
+        isArrowRight = false
+        isArrowUp = false
+        isArrowLeft = false
+        isArrowDown = false
+        isSpaceBar = true
     }
 })
 document.addEventListener('keyup', () => {
@@ -76,18 +100,18 @@ document.addEventListener('keyup', () => {
     isArrowUp = false
     isArrowLeft = false
     isArrowDown = false
+    isSpaceBar = false
 })
 
 function clouds() {
     let gap = cloud.height + 160
-
     for (let i = 0; i < treeCloud.length; i++) {
         ctx.drawImage(cloud, treeCloud[i].x , treeCloud[i].y)
         ctx.drawImage(cherryTree, treeCloud[i].x, treeCloud[i].y + gap)
         treeCloud[i].x =  treeCloud[i].x - 1
 
-        if (treeCloud[i].x < 0) {
-            treeCloud[i] = { x: 750 , y:  Math.floor(Math.random() * cherryTree.height)}
+        if (treeCloud[i].x + cloud.width< 0) {
+            treeCloud[i] = { x: 900 , y:  Math.floor(Math.random() * cherryTree.height)}
         }
 
         if (floristX + florist.width >= treeCloud[i].x && floristX <= treeCloud[i].x + cloud.width && 
@@ -95,21 +119,32 @@ function clouds() {
             (floristY + florist.height + florist.width >= treeCloud[i].y + gap + 75 &&  floristY + florist.height + florist.width <= treeCloud[i].y + gap + cloud.height + 75))) {
             gameOver = true
         }
+        
+        if (score >= 5 && score < 10) {
+            treeCloud[i].x =  treeCloud[i].x - 1.5
+        }
+        if (score >= 10 && score < 15) {
+            treeCloud[i].x =  treeCloud[i].x - 2
+        }
     }
 }
 
 function pinkPetals() {
     if (multiplePinkPetals.length == 0) {
         multiplePinkPetals[0] = { x: 400 , y:  Math.floor(Math.random() * canvas.height - pinkPetal.height)}
+        console.log('hello')
     }
     for (let i = 0; i < multiplePinkPetals.length; i++ ) {
         if (multiplePinkPetals[i].x < 0 ) {
-            multiplePinkPetals[i] = { x: 400 , y:  Math.floor(Math.random() * canvas.height - pinkPetal.height)}
+            multiplePinkPetals[i] = { x: 600 , y:  Math.floor(Math.random() * canvas.height - pinkPetal.height)}
         }
         ctx.drawImage(pinkPetal, multiplePinkPetals[i].x, multiplePinkPetals[i].y)
         multiplePinkPetals[i].x = multiplePinkPetals[i].x- 1
-        if ((floristX >= multiplePinkPetals[i].x && floristX <= multiplePinkPetals[i].x + pinkPetal.width) && (floristY >= multiplePinkPetals[i].y && floristY <= multiplePinkPetals[i].y + pinkPetal.height) ) {
-            multiplePinkPetals.shift()     
+        if ((floristX  + florist.width >= multiplePinkPetals[i].x && floristX <= multiplePinkPetals[i].x + pinkPetal.width) &&
+            (floristY + florist.width>= multiplePinkPetals[i].y && floristY <= multiplePinkPetals[i].y + pinkPetal.height) && 
+            (floristX + florist.width + florist.height >= multiplePinkPetals[i].x && floristX + florist.width + florist.height >= multiplePinkPetals[i].x + pinkPetal.height)) {
+            multiplePinkPetals.shift()
+            audioPetal.play()
             score++
         }
     }
@@ -117,7 +152,7 @@ function pinkPetals() {
 
 function blackPetals() {
     if (multipleBlackPetals.length == 0) {
-        multiplePinkPetals[0] = { x: 400 , y:  Math.floor(Math.random() * canvas.height - pinkPetal.height)}
+        multipleBlackPetals[0] = { x: 400 , y:  Math.floor(Math.random() * canvas.height - blackPetal.height)}
     }
     for (let i = 0; i < multipleBlackPetals.length; i++ ) {
         if (multipleBlackPetals[i].x < 0 ) {
@@ -125,16 +160,52 @@ function blackPetals() {
         }
         ctx.drawImage(blackPetal, multipleBlackPetals[i].x, multipleBlackPetals[i].y)
         multipleBlackPetals[i].x = multipleBlackPetals[i].x- 1.5
-        if ((floristX >= multipleBlackPetals[i].x && floristX <= multipleBlackPetals[i].x + blackPetal.width) && (floristY >= multipleBlackPetals[i].y && floristY <= multipleBlackPetals[i].y +blackPetal.height) ) {
+        if ((floristX  + florist.width >= multipleBlackPetals[i].x && floristX <= multipleBlackPetals[i].x + blackPetal.width) &&
+        (floristY + florist.width>= multipleBlackPetals[i].y && floristY <= multipleBlackPetals[i].y + blackPetal.height) && 
+        (floristX + florist.width + florist.height >=multipleBlackPetals[i].x && floristX + florist.width + florist.height >= multipleBlackPetals[i].x + blackPetal.height)) {
+            audioBlackPetal.play()
             multipleBlackPetals.shift()     
             score--
+        }
+        if (score >= 5 && score < 10) {
+            multipleBlackPetals[i].x = multipleBlackPetals[i].x- 2
+        }
+        if (score >= 10 && score < 15) {
+            multipleBlackPetals[i].x = multipleBlackPetals[i].x- 2.5
         }
     }
 }
 
+function start() {
+    mainScreen.style.display = 'none'
+    canvas.style.display = 'block'
+    audioMainScreen.pause()
+    audioCanva.play()
+    draw()
+}
 
+function reStart () {
+    gameOver = false
+    intervalId = 0
+    treeCloud = [
+        {x: 200 , y:100},
+        {x: 550 , y: 150},
+        {x: 900, y: 50}
+    ]
+    floristX = 30
+    floristY = 100
+    score = 0
+    gameOverScreen.style.display = 'none'
+    canvas.style.display = 'block'
+    audioCanva.play()
+    draw()
+}
 
 function direction () {
+    if (isSpaceBar) {
+        cancelAnimationFrame(intervalId)
+        console.log('hello')
+    }
     if (isArrowRight) {
         floristX = floristX + 2
     }
@@ -150,7 +221,49 @@ function direction () {
     if (isArrowDown) {
         floristY = floristY + 2
     }
+    if (isArrowRight && score >= 2) {
+        floristX = floristX + 4
+    }
+    if (isArrowLeft && score >= 2) {
+        floristX = floristX - 4
+    }
+
+    if (isArrowUp && score >= 2) {
+        floristY = floristY - 4
+    }
+
+    if (isArrowDown && score >= 2) {
+        floristY = floristY + 4
+    }
+
 }
+
+function gameOverFunc () {
+    if (gameOver) {
+        cancelAnimationFrame(intervalId)
+        audioCanva.pause()
+        audioGameOver.play()
+        mainScreen.style.display = 'none'
+        canvas.style.display = 'none'
+        gameOverScreen.style.display='block'
+        winningScreen.style.display='none'
+    } else {
+        intervalId = requestAnimationFrame(draw)
+    }
+}
+
+function winningTheGame () {
+    if ( score == 15) {
+        cancelAnimationFrame(intervalId)
+        audioCanva.pause()
+        audioWinningScreen.play()
+        mainScreen.style.display = 'none'
+        canvas.style.display = 'none'
+        gameOverScreen.style.display='none'
+        winningScreen.style.display='block'
+    }
+}
+
 function draw () {
     ctx.drawImage(bg, 0, 0)
     ctx.drawImage(florist, floristX, floristY)
@@ -161,41 +274,45 @@ function draw () {
     ctx.font = '20px Verdana'
     ctx.fillText(`Score : ${score}`, 20, canvas.height - 35)
 
-
+    
+    gameOverFunc()
     direction()
-
-    if (gameOver) {
-        cancelAnimationFrame(intervalId)
-        mainScreen.style.display = 'none'
-        canvas.style.display = 'none'
-        gameOverScreen.style.display='block'
-        winningScreen.style.display='none'
-    } else {
-        intervalId = requestAnimationFrame(draw)
-    }
-
-    if ( score == 2) {
-        cancelAnimationFrame(intervalId)
-        winningScreen.style.display='block'
-        canvas.style.display = 'none'
-    }
+    winningTheGame()
+    timer()
 }
 
+//audiosfiles
+let audioMainScreen = new Audio('/Audio/mainScreen.mp3')
+let audioCanva = new Audio('/Audio/mainMusic.mp3')
+let audioGameOver = new Audio('/Audio/gameOver2.mp3')
+let audioWinningScreen = new Audio('/Audio/winningScreen.mp3')
+let audioPetal = new Audio('/Audio/super-mario-bros-coin-sound-effect-free-ringtone-download.mp3')
+let audioBlackPetal = new Audio('/Audio/mario-lose-a-life-sound-effect-free-ringtone-download (mp3cut.net).mp3')
 
 window.addEventListener('load', () => {
+    audioMainScreen.play()
     mainScreen.style.display = 'block'
     canvas.style.display = 'none'
     gameOverScreen.style.display='none'
+    winningScreen.style.display = 'none'
     btnStart.addEventListener('click', () => {
-        mainScreen.style.display = 'none'
-        canvas.style.display = 'block'
-        draw()
+        start()
     })
     btnReStart.addEventListener('click', () => {
-        gameOver = false
-        gameOverScreen.style.display = 'none'
-        canvas.style.display = 'block'
-        draw()
+        reStart()
     })
-    
+    btnReStart2.addEventListener('click', () => {
+        reStart()
+    })
+    btnSound.addEventListener('click', () => {
+        if(btnSound.innerText == 'Sound On') {
+            console.log(btnSound.innerText)
+            audioMainScreen.pause()
+            btnSound.innerText = 'Sound Off'
+            console.log(btnSound.innerText)
+        } else if (btnSound.innerText == 'Sound Off') {
+            audioMainScreen.play()
+            btnSound.innerText = 'Sound On'
+        }
+    })
 })

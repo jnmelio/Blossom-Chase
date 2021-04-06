@@ -1,3 +1,5 @@
+
+
 body {
     box-sizing: border-box;
     text-align: center;
@@ -16,7 +18,7 @@ body {
 #mainTitle {
     border: 1px solid pink;
     position: relative;
-    padding-top: 150px;
+    padding-top: 130px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size:  70px;
     color:pink;
@@ -29,9 +31,6 @@ body {
     margin-top: 0px;
 }
 
-.gameOver {
-
-}
 .gameOverScreen {
     border: 2px solid black;
     width: 70%;
@@ -49,5 +48,37 @@ body {
     font-size:  70px;
     color:darkred;
     margin-bottom: 0px;
+}
+
+.winningScreen {
+
+    width: 70%;
+    height: 500px;
+    border: 2px solid black;
+    background-image: url('/Images/winningScreen.jpg');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#winningTitle {
+    font-family: 'Nanum Brush Script', cursive;
+    position: relative;
+    font-size:  100px;
+    color: #fcdcf9;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+#winText {
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 30px;
+    color : #85ff85;
+    margin-top: 0px;
+}
+
+#imageWin {
+    position: relative;
+    margin-left:  350px;
 }
 
