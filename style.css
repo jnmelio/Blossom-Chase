@@ -1,13 +1,11 @@
-
-
 body {
     box-sizing: border-box;
     text-align: center;
 }
 
 .mainScreen {
-    width: 70%;
-    height: 500px;
+    width: 1000px;
+    height: 560px;
     border: 2px solid black;
     background-image: url('/Images/main-screen-back.jpg');
     background-position: center;
@@ -16,24 +14,44 @@ body {
 }
 
 #mainTitle {
-    border: 1px solid pink;
-    position: relative;
-    padding-top: 130px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size:  70px;
-    color:pink;
+    padding-top: 98px;
+    font-family: 'Nanum Brush Script', cursive;
+    font-size:  100px;
+    color:#ffd4d4;
     margin-bottom: 0px;
 }
 
 #instructions {
-    color : white;
-    border: 1px solid black;
+    color : #ffd4d4;
+    font-weight: 800;
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 20px;
     margin-top: 0px;
+}
+
+#start {
+position: absolute;
+font-family: 'Nanum Brush Script', cursive;
+font-size: 20px;
+left: 421px;
+top: 480px;
+border-radius: 32px;
+background-color: #ffd4d4;
+}
+
+#sound {
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 20px;
+    border-radius: 32px;
+    background-color: #ffd4d4;
+    position: absolute;
+    top: 20px;
+    left: 790px;
 }
 
 .gameOverScreen {
     border: 2px solid black;
-    width: 70%;
+    width: 1000px;
     height: 500px;
     background-image: url('./Images/gameoverback.jpg');
     background-position: center;
@@ -41,21 +59,31 @@ body {
     background-repeat: no-repeat;
 }
 #gameOverTitle {
-    border: 1px solid pink;
     position: relative;
-    padding-top: 100px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size:  70px;
+    font-family: 'Nanum Brush Script', cursive;
+    font-size:  100px;
     color:darkred;
     margin-bottom: 0px;
 }
-
+#gameOverText {
+    font-family: 'Nanum Brush Script', cursive;
+    color:white;
+    font-size: 20px;
+    font-weight: 800;
+}
+#restart {
+font-family: 'Nanum Brush Script', cursive;
+font-size: 20px;
+border-radius: 32px;
+background-color: darkred;
+color: white;
+}
 .winningScreen {
 
-    width: 70%;
+    width: 1000px;
     height: 500px;
     border: 2px solid black;
-    background-image: url('/Images/winningScreen.jpg');
+    background-image: url('/Images/winningScreen.png');
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -67,18 +95,28 @@ body {
     font-size:  100px;
     color: #fcdcf9;
     margin-bottom: 0px;
-    margin-top: 0px;
+    margin-top: 95px;
 }
 
 #winText {
     font-family: 'Nanum Brush Script', cursive;
     font-size: 30px;
-    color : #85ff85;
+    font-weight: 800;
+    color : #fcdcf9;
     margin-top: 0px;
+
 }
 
 #imageWin {
     position: relative;
     margin-left:  350px;
 }
-
+#restart2 {
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 20px;
+    border-radius: 32px;
+    background-color: #ffd4d4;
+}
+.redButton {
+    background-color: darkred;
+}

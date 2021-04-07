@@ -11,6 +11,7 @@ btnReStart2 = document.querySelector('#restart2')
 btnSound = document.querySelector('#sound')
 
 
+
 //Images
 let bg = new Image(); 
 bg.src = './Images/pixel-art-landscape-Idees-designs-photo.png'
@@ -50,6 +51,8 @@ let multipleBlackPetals = [
     {x: 1000, y:250},
     {x: 800, y: 400}
 ]
+let pause = false
+
 // Timer
 function timer () {
     let counter = 0
@@ -152,7 +155,7 @@ function pinkPetals() {
 
 function blackPetals() {
     if (multipleBlackPetals.length == 0) {
-        multipleBlackPetals[0] = { x: 400 , y:  Math.floor(Math.random() * canvas.height - blackPetal.height)}
+        multipleBlackPetals[0] = { x: 700 , y:  Math.floor(Math.random() * canvas.height - blackPetal.height)}
     }
     for (let i = 0; i < multipleBlackPetals.length; i++ ) {
         if (multipleBlackPetals[i].x < 0 ) {
@@ -180,6 +183,7 @@ function start() {
     mainScreen.style.display = 'none'
     canvas.style.display = 'block'
     audioMainScreen.pause()
+    audioMainScreen.currentTime = 0
     audioCanva.play()
     draw()
 }
@@ -196,16 +200,26 @@ function reStart () {
     floristY = 100
     score = 0
     gameOverScreen.style.display = 'none'
+    winningScreen.style.display = 'none'
     canvas.style.display = 'block'
+    audioWinningScreen.pause()
+    audioWinningScreen.currentTime = 0
     audioCanva.play()
+    audioGameOver.pause()
+    audioGameOver.currentTime = 0
     draw()
 }
 
 function direction () {
-    if (isSpaceBar) {
+    if (isSpaceBar && pause == false) {
         cancelAnimationFrame(intervalId)
+        pause = true
         console.log('hello')
+    }  else if (isSpaceBar && pause == true) {
+        requestAnimationFrame(draw)
+        pause = false
     }
+
     if (isArrowRight) {
         floristX = floristX + 2
     }
@@ -242,6 +256,7 @@ function gameOverFunc () {
     if (gameOver) {
         cancelAnimationFrame(intervalId)
         audioCanva.pause()
+        audioCanva.currentTime = 0
         audioGameOver.play()
         mainScreen.style.display = 'none'
         canvas.style.display = 'none'
@@ -253,9 +268,10 @@ function gameOverFunc () {
 }
 
 function winningTheGame () {
-    if ( score == 15) {
+    if ( score == 2) {
         cancelAnimationFrame(intervalId)
         audioCanva.pause()
+        audioCanva.currentTime = 0
         audioWinningScreen.play()
         mainScreen.style.display = 'none'
         canvas.style.display = 'none'
@@ -294,7 +310,7 @@ window.addEventListener('load', () => {
     mainScreen.style.display = 'block'
     canvas.style.display = 'none'
     gameOverScreen.style.display='none'
-    winningScreen.style.display = 'none'
+    winningScreen.style.display ='none'
     btnStart.addEventListener('click', () => {
         start()
     })
@@ -305,14 +321,32 @@ window.addEventListener('load', () => {
         reStart()
     })
     btnSound.addEventListener('click', () => {
-        if(btnSound.innerText == 'Sound On') {
-            console.log(btnSound.innerText)
+        if(btnSound.innerText == 'Sound Off' && mainScreen.style.display == 'block') {
             audioMainScreen.pause()
-            btnSound.innerText = 'Sound Off'
-            console.log(btnSound.innerText)
-        } else if (btnSound.innerText == 'Sound Off') {
-            audioMainScreen.play()
             btnSound.innerText = 'Sound On'
+        } else if (btnSound.innerText == 'Sound On' && mainScreen.style.display == 'block') {
+            audioMainScreen.play()
+            btnSound.innerText = 'Sound Off'
+        } else if (btnSound.innerText == 'Sound Off' && canvas.style.display == 'block') {
+            audioCanva.pause()
+            btnSound.innerText = 'Sound On'
+        } else if (btnSound.innerText == 'Sound On' && canvas.style.display == 'block') {
+            audioCanva.play()
+            btnSound.innerText = 'Sound Off'
+        } else if (btnSound.innerText == 'Sound Off' && winningScreen.style.display == 'block') { 
+            audioWinningScreen.pause()
+            btnSound.innerText = 'Sound On'
+        } else if (btnSound.innerText == 'Sound On' && winningScreen.style.display == 'block') {
+            audioWinningScreen.play()
+            btnSound.innerText = 'Sound Off'
+        } else if (btnSound.innerText == 'Sound Off' && gameOverScreen.style.display == 'block') {
+            audioGameOver.pause()
+            btnSound.innerText = 'Sound On'
+            btnSound.classList = '.redButton'
+        } else if (btnSound.innerText == 'Sound On' && gameOverScreen.style.display == 'block'){
+            audioGameOver.play()
+            btnSound.innerText = 'Sound Off'
+            btnSound.classList = '.redButton'
         }
     })
 })

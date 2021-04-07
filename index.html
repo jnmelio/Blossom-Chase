@@ -9,24 +9,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Kaushan+Script&family=Montez&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div>
+        <button id='sound' class='redButton'>Sound Off</button>
     <div class='main'>
         <section class='mainScreen' id='backgroundImage'>
-            <button id='sound'>Sound On</button>
             <h1 id='mainTitle'>BLOSSOM</h1>
-            <p id='instructions'>You are a florist who needs to catch cherry blossom petals to sell in his shop.  You have a little helicopter to do so. <br> But beware of the clouds, cherry trees and dark petals. They will prevent you of catching the right amount of pink petals<br>
-            and cause your doom. You can use the up, down, left and right directions to evolve in this world. Once you start <br> a timer will be set. Collect thre right number 
-            of petals before the end of the timer to get to the next level.</p>
+            <p id='instructions'>You are a florist who needs to catch pink cherry blossom petals to sell in his shop.  You have a little helicopter to do so. 
+                <br> But beware of the clouds and dark petals. The dark petals will prevent you from catching the right amount of pink petals<br>
+            and the clouds will cause your doom. You can use the up, down, left and right directions to evolve in this world. Once you start <br> 
+            a timer of 2 min will be set. Collect 15 petals before the end of the timer or unleash chaos on the world.</p>
             <button id='start'>Start Game</button>
         </section>
     </div>
-    <canvas id="myCanvas" width="1000" height="560"></canvas>
+    <canvas id="myCanvas" width="900" height="560"></canvas>
     <div class='gameOver'>
         <section class='gameOverScreen'>
             <h1 id='gameOverTitle'>GAME OVER</h1>
             <img src="Images/sms_alexmiracle.png"/>
-            <p>The florist could not get the petals and therefore did not make any money. His wife left him for the food delivery guy and his children<br>
-            disowned him cause delivery guy had a PS5. Without money Florist could not eat but managed <br> to bravely caught a pangolin he decided to eat.
-        right away creeating Covid19. Only because YOU could not catch some damn petals. Hope you're happy!</p>
+            <p id='gameOverText'>The florist could not get the petals and therefore did not make any money.<br> His wife left him for the food delivery 
+                guy and his children disowned him cause delivery guy had a PS5. <br>Without money, Florist could not buy food and became homeless. <br> 
+                One day he caught a pangolin and ate it. <br> He then became the first patient of Covid19.<br>
+        Only because YOU could not catch some damn petals. <br>Hope you're happy!</p>
             <button id='restart'>Restart Game</button>
         </section>
     </div>
@@ -37,8 +40,8 @@
             <section>
                 <button id='restart2'>Restart Game</button>
             </section>
-            <img id='imageWin' src='/Images/winningAlex.png'/>
         </section>
+    </div>
     </div>
     <script src="main.js"></script>
 </body>
