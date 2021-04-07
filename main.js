@@ -25,6 +25,8 @@ let cloud = new Image()
 cloud.src = './Images/cloud.png'
 let blackPetal = new Image()
 blackPetal.src = './Images/black petal.png'
+let hokusai = new Image()
+hokusai.src = './Images/hokusai wave.jpg'
 
 //variables
 let gameOver = false
@@ -96,6 +98,12 @@ document.addEventListener('keydown', (event) => {
         isArrowLeft = false
         isArrowDown = false
         isSpaceBar = true
+        if (isSpaceBar && pause) {
+            requestAnimationFrame(draw)
+            pause = false
+            isSpaceBar = false
+            console.log('bye')
+        }
     }
 })
 document.addEventListener('keyup', () => {
@@ -152,7 +160,6 @@ function pinkPetals() {
         }
     }
 }
-
 function blackPetals() {
     if (multipleBlackPetals.length == 0) {
         multipleBlackPetals[0] = { x: 700 , y:  Math.floor(Math.random() * canvas.height - blackPetal.height)}
@@ -160,6 +167,12 @@ function blackPetals() {
     for (let i = 0; i < multipleBlackPetals.length; i++ ) {
         if (multipleBlackPetals[i].x < 0 ) {
             multipleBlackPetals[i] = { x: 1000 , y:  Math.floor(Math.random() * canvas.height - blackPetal.height)}
+        }
+        if (score >= 5 && score < 10) {
+            multipleBlackPetals[i].x = multipleBlackPetals[i].x- 2
+        }
+        if (score >= 10 && score < 15) {
+            multipleBlackPetals[i].x = multipleBlackPetals[i].x- 2.5
         }
         ctx.drawImage(blackPetal, multipleBlackPetals[i].x, multipleBlackPetals[i].y)
         multipleBlackPetals[i].x = multipleBlackPetals[i].x- 1.5
@@ -169,12 +182,6 @@ function blackPetals() {
             audioBlackPetal.play()
             multipleBlackPetals.shift()     
             score--
-        }
-        if (score >= 5 && score < 10) {
-            multipleBlackPetals[i].x = multipleBlackPetals[i].x- 2
-        }
-        if (score >= 10 && score < 15) {
-            multipleBlackPetals[i].x = multipleBlackPetals[i].x- 2.5
         }
     }
 }
@@ -215,10 +222,7 @@ function direction () {
         cancelAnimationFrame(intervalId)
         pause = true
         console.log('hello')
-    }  else if (isSpaceBar && pause == true) {
-        requestAnimationFrame(draw)
-        pause = false
-    }
+    }  
 
     if (isArrowRight) {
         floristX = floristX + 2
@@ -268,7 +272,7 @@ function gameOverFunc () {
 }
 
 function winningTheGame () {
-    if ( score == 2) {
+    if ( score == 15) {
         cancelAnimationFrame(intervalId)
         audioCanva.pause()
         audioCanva.currentTime = 0
@@ -342,11 +346,11 @@ window.addEventListener('load', () => {
         } else if (btnSound.innerText == 'Sound Off' && gameOverScreen.style.display == 'block') {
             audioGameOver.pause()
             btnSound.innerText = 'Sound On'
-            btnSound.classList = '.redButton'
+            btnSound.idList = 'redButton'
         } else if (btnSound.innerText == 'Sound On' && gameOverScreen.style.display == 'block'){
             audioGameOver.play()
             btnSound.innerText = 'Sound Off'
-            btnSound.classList = '.redButton'
+            btnSound.idList = 'redButton'
         }
     })
 })

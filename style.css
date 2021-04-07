@@ -7,7 +7,7 @@ body {
     width: 1000px;
     height: 560px;
     border: 2px solid black;
-    background-image: url('/Images/main-screen-back.jpg');
+    background-image: url('./Images/main-screen-back.jpg');
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -33,20 +33,22 @@ body {
 position: absolute;
 font-family: 'Nanum Brush Script', cursive;
 font-size: 20px;
-left: 421px;
-top: 480px;
+left: 24.2em;
+top: 27em;
 border-radius: 32px;
 background-color: #ffd4d4;
 }
-
+#redButton {
+    background-color: darkred;
+}
 #sound {
     font-family: 'Nanum Brush Script', cursive;
     font-size: 20px;
     border-radius: 32px;
     background-color: #ffd4d4;
     position: absolute;
-    top: 20px;
-    left: 790px;
+    top: 1em;
+    left: 45em;
 }
 
 .gameOverScreen {
@@ -83,7 +85,7 @@ color: white;
     width: 1000px;
     height: 500px;
     border: 2px solid black;
-    background-image: url('/Images/winningScreen.png');
+    background-image: url('./Images/winningScreen.png');
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -117,6 +119,4 @@ color: white;
     border-radius: 32px;
     background-color: #ffd4d4;
 }
-.redButton {
-    background-color: darkred;
-}
+
