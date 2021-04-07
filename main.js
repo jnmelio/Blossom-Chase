@@ -302,12 +302,12 @@ function draw () {
 }
 
 //audiosfiles
-let audioMainScreen = new Audio('/Audio/mainScreen.mp3')
-let audioCanva = new Audio('/Audio/mainMusic.mp3')
-let audioGameOver = new Audio('/Audio/gameOver2.mp3')
-let audioWinningScreen = new Audio('/Audio/winningScreen.mp3')
-let audioPetal = new Audio('/Audio/super-mario-bros-coin-sound-effect-free-ringtone-download.mp3')
-let audioBlackPetal = new Audio('/Audio/mario-lose-a-life-sound-effect-free-ringtone-download (mp3cut.net).mp3')
+let audioMainScreen = new Audio('./Audio/mainScreen.mp3')
+let audioCanva = new Audio('./Audio/mainMusic.mp3')
+let audioGameOver = new Audio('./Audio/gameOver2.mp3')
+let audioWinningScreen = new Audio('./Audio/winningScreen.mp3')
+let audioPetal = new Audio('./Audio/super-mario-bros-coin-sound-effect-free-ringtone-download.mp3')
+let audioBlackPetal = new Audio('./Audio/mario-lose-a-life-sound-effect-free-ringtone-download (mp3cut.net).mp3')
 
 window.addEventListener('load', () => {
     audioMainScreen.play()
