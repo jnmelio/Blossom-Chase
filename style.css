@@ -39,7 +39,13 @@ border-radius: 32px;
 background-color: #ffd4d4;
 }
 #redButton {
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 20px;
+    border-radius: 32px;
     background-color: darkred;
+    position: absolute;
+    top: 1em;
+    left: 45em;
 }
 #sound {
     font-family: 'Nanum Brush Script', cursive;
