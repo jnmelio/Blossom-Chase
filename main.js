@@ -383,15 +383,15 @@ function draw () {
 
 //audiosfiles
 let audioMainScreen = new Audio('./Audio/mainScreen.mp3')
-audioMainScreen.volume = 0.06
+audioMainScreen.volume = 0.03
 let audioCanva = new Audio('./Audio/mainMusic.mp3')
-audioCanva.volume = 0.06
+audioCanva.volume = 0.03
 let audioGameOver = new Audio('./Audio/gameOver2.mp3')
-audioGameOver.volume = 0.06
+audioGameOver.volume = 0.03
 let audioWinningScreen = new Audio('./Audio/winningScreen.mp3')
-audioWinningScreen.volume = 0.06
+audioWinningScreen.volume = 0.03
 let audioPetal = new Audio('./Audio/super-mario-bros-coin-sound-effect-free-ringtone-download.mp3')
-audioPetal.volume = 0.06
+audioPetal.volume = 0.03
 let audioBlackPetal = new Audio('./Audio/mario-lose-a-life-sound-effect-free-ringtone-download (mp3cut.net).mp3')
 audioBlackPetal.volume = 0.15
 
