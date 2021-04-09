@@ -114,3 +114,6 @@ https://www.notion.so/Blossom-Chase-9a95971efe4b459093ceb25413c3bbfc
 
 Slides
 https://slides.com/jnmelio/blossom-chase
+
+Link to the game 
+https://jnmelio.github.io/Blossom-Chase/
