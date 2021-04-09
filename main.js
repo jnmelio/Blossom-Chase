@@ -25,8 +25,6 @@ let cloud = new Image()
 cloud.src = './Images/cloud.png'
 let blackPetal = new Image()
 blackPetal.src = './Images/black petal.png'
-let hokusai = new Image()
-hokusai.src = './Images/hokusai wave.png'
 let superman = new Image()
 superman.src = './Images/superman.png'
 let batman = new Image()
@@ -66,8 +64,6 @@ let multipleBlackPetals = [
     {x: 600, y: 550}
 ]
 let pause = false
-// let hokusaiX = 0
-// let hokusaiY = 30
 let supermanX = 1000
 let supermanY = 500
 let batmanX = 2500
@@ -82,15 +78,15 @@ function timer () {
     let counter = 0
     let id1 = setInterval (() => {
         counter++
-        if (counter == 120) {
+        if (counter == 600) {
             gameOver = true
         }
     }, 1000 )
-    console.log('hello')
 }
 
 //KeyEvents
 document.addEventListener('keydown', (event) => {
+    //Arrow keys
     if (event.code == 'ArrowRight') {
         isArrowRight = true
         isArrowUp = false
@@ -121,6 +117,7 @@ document.addEventListener('keydown', (event) => {
         isArrowLeft = false
         isArrowDown = false
         isSpaceBar = true
+        //Space bar pause
         if (isSpaceBar && pause) {
             requestAnimationFrame(draw)
             pause = false
@@ -152,11 +149,11 @@ function clouds() {
         //collision with clouds
         if (floristX + florist.width >= treeCloud[i].x && floristX <= treeCloud[i].x + cloud.width && 
             ((floristY + florist.width <= treeCloud[i].y + cloud.height && floristY + florist.width >= treeCloud[i].y ) || 
-            (floristY + florist.height + florist.width >= treeCloud[i].y + gap + 75 &&  floristY + florist.height + florist.width <= treeCloud[i].y + gap + cloud.height + 75))) {
+            (floristY + florist.height + florist.width >= treeCloud[i].y + gap + 50 &&  floristY + florist.height + florist.width <= treeCloud[i].y + gap + cloud.height + 50))) {
             gameOver = true
         }
         //difficulty increasing
-        if (score >= 5 && score < 10) {
+        if (score >= 2 && score < 10) {
             treeCloud[i].x =  treeCloud[i].x - 1.5
         }
         if (score >= 10 && score < 15) {
@@ -200,7 +197,7 @@ function blackPetals() {
         if (multipleBlackPetals[i].x < 0 ) {
             multipleBlackPetals[i] = { x: 1000 , y:  Math.floor(Math.random() * canvas.height - blackPetal.height)}
         }
-        if (score >= 5 && score < 10) {
+        if (score >= 2 && score < 10) {
             multipleBlackPetals[i].x = multipleBlackPetals[i].x- 2
         }
         if (score >= 10 && score < 15) {
@@ -208,7 +205,7 @@ function blackPetals() {
         }
         ctx.drawImage(blackPetal, multipleBlackPetals[i].x, multipleBlackPetals[i].y)
         multipleBlackPetals[i].x = multipleBlackPetals[i].x- 1.5
-        // collision with the petals + sound mangament
+        // collision with the petals + sound management
         if ((floristX  + florist.width >= multipleBlackPetals[i].x && floristX <= multipleBlackPetals[i].x + blackPetal.width) &&
         (floristY + florist.width>= multipleBlackPetals[i].y && floristY <= multipleBlackPetals[i].y + blackPetal.height) && 
         (floristX + florist.width + florist.height >=multipleBlackPetals[i].x && floristX + florist.width + florist.height >= multipleBlackPetals[i].x + blackPetal.height)) {
@@ -227,6 +224,7 @@ function blackPetals() {
 function start() {
     mainScreen.style.display = 'none'
     canvas.style.display = 'block'
+    //sound management
     audioMainScreen.pause()
     audioMainScreen.currentTime = 0
     if (btnSound.innerText == 'Sound On' && canvas.style.display == 'block') {
@@ -235,7 +233,6 @@ function start() {
         audioCanva.play()
     }
     draw()
-    timer()
 }
 
 function reStart () {
@@ -275,17 +272,16 @@ function reStart () {
     audioGameOver.currentTime = 0
     btnSound.id ='sound'
     draw()
-    timer()
-
 }
 
 function direction () {
+    //part2 of pause
     if (isSpaceBar && pause == false) {
         cancelAnimationFrame(intervalId)
         pause = true
         console.log('hello')
     }  
-
+    //florist speed
     if (isArrowRight) {
         floristX = floristX + 2.5
     }
@@ -301,31 +297,25 @@ function direction () {
     if (isArrowDown) {
         floristY = floristY + 2.5
     }
-    if (isArrowRight && score >= 5) {
+    if (isArrowRight && score >= 2) {
         floristX = floristX + 4
     }
-    if (isArrowLeft && score >= 5) {
+    if (isArrowLeft && score >= 2) {
         floristX = floristX - 4
     }
 
-    if (isArrowUp && score >= 5) {
+    if (isArrowUp && score >= 2) {
         floristY = floristY - 4
     }
 
-    if (isArrowDown && score >= 5) {
+    if (isArrowDown && score >= 2) {
         floristY = floristY + 4
     }
 
 }
-// function draw2() {
-//         ctx.drawImage(hokusai, hokusaiX, hokusaiY)
-//         hokusaiX = hokusaiX + 3
-//         intervalId2 = requestAnimationFrame(draw2)
-//         // cancelAnimationFrame(intervalId2)
-// }
+
 function gameOverFunc () {
     if (gameOver) {
-        // draw2()
             cancelAnimationFrame(intervalId)
             mainScreen.style.display = 'none'
             canvas.style.display = 'none'
@@ -346,19 +336,19 @@ function gameOverFunc () {
 }
 
 function winningTheGame () {
-    if ( score == 15) {
+    if ( score == 3) {
         cancelAnimationFrame(intervalId)
         audioCanva.pause()
         audioCanva.currentTime = 0
+        mainScreen.style.display = 'none'
+        canvas.style.display = 'none'
+        gameOverScreen.style.display='none'
+        winningScreen.style.display='block'
         if (btnSound.innerText == 'Sound On' && winningScreen.style.display == 'block') {
             audioWinningScreen.pause()
         } else if (btnSound.innerText == 'Sound Off' && winningScreen.style.display == 'block') {
             audioWinningScreen.play()
         }
-        mainScreen.style.display = 'none'
-        canvas.style.display = 'none'
-        gameOverScreen.style.display='none'
-        winningScreen.style.display='block'
     }
 }
 function easterEggs () {
@@ -382,23 +372,30 @@ function draw () {
     clouds()
     pinkPetals()
     blackPetals()
-    // timer()
     ctx.font = '20px Verdana'
     ctx.fillText(`Score : ${score}`, 20, canvas.height - 35)
     gameOverFunc()
     direction()
     winningTheGame()
+    timer()
+
 }
 
 //audiosfiles
 let audioMainScreen = new Audio('./Audio/mainScreen.mp3')
+audioMainScreen.volume = 0.06
 let audioCanva = new Audio('./Audio/mainMusic.mp3')
+audioCanva.volume = 0.06
 let audioGameOver = new Audio('./Audio/gameOver2.mp3')
+audioGameOver.volume = 0.06
 let audioWinningScreen = new Audio('./Audio/winningScreen.mp3')
+audioWinningScreen.volume = 0.06
 let audioPetal = new Audio('./Audio/super-mario-bros-coin-sound-effect-free-ringtone-download.mp3')
+audioPetal.volume = 0.06
 let audioBlackPetal = new Audio('./Audio/mario-lose-a-life-sound-effect-free-ringtone-download (mp3cut.net).mp3')
+audioBlackPetal.volume = 0.15
 
-//Events
+//Events and sound cut between screens
 window.addEventListener('load', () => {
     mainScreen.style.display = 'block'
     canvas.style.display = 'none'
