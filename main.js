@@ -153,7 +153,7 @@ function clouds() {
             gameOver = true
         }
         //difficulty increasing
-        if (score >= 2 && score < 10) {
+        if (score >= 5 && score < 10) {
             treeCloud[i].x =  treeCloud[i].x - 1.5
         }
         if (score >= 10 && score < 15) {
@@ -197,7 +197,7 @@ function blackPetals() {
         if (multipleBlackPetals[i].x < 0 ) {
             multipleBlackPetals[i] = { x: 1000 , y:  Math.floor(Math.random() * canvas.height - blackPetal.height)}
         }
-        if (score >= 2 && score < 10) {
+        if (score >= 5 && score < 10) {
             multipleBlackPetals[i].x = multipleBlackPetals[i].x- 2
         }
         if (score >= 10 && score < 15) {
@@ -336,7 +336,7 @@ function gameOverFunc () {
 }
 
 function winningTheGame () {
-    if ( score == 3) {
+    if ( score == 15) {
         cancelAnimationFrame(intervalId)
         audioCanva.pause()
         audioCanva.currentTime = 0
